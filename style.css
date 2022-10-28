@@ -1,0 +1,63 @@
+/* use flat ui color site */
+/* use font awesome */
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+ 
+}
+.toolbox-cont{
+height: 5rem;
+background: black;
+display: flex;
+align-items: center;
+
+}
+.toolbox-cont>*{
+    margin-left: 4rem;
+    border-radius: 3px;
+}
+.toolbox-priority-cont{
+    height: 3rem;
+    background: magenta;
+    width: 18rem;
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+       justify-content: space-around;
+ 
+}
+.action-btn-cont{
+    height: 3rem;
+    background: coral;
+     width: 7rem;
+   display: flex;
+  
+
+}
+.action-btn-cont>*{
+ display: flex;
+justify-content: center;
+ align-items: center;
+width: 50%;
+font-size: 2rem;
+
+}
+.color{
+    height: 2rem;
+   width: 3rem;
+
+   border-radius: 1rem;
+}
+.lightpink{
+ background: lightpink;
+}
+.lightgreen{
+ background: lightgreen;
+}
+.lightblue{
+ background: lightblue;
+}
+.black{
+ background: black;
+}
