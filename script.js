@@ -1,4 +1,12 @@
 let addBtn = document.querySelector('.add-btn');
-addBtn.addEventListener('click' ,()=>{
-    console.log('linked');
+let modelContainer = document.querySelector('.model-cont');
+let addFlag = false;
+addBtn.addEventListener('click' ,(e)=>{
+    if(addFlag == false){
+        modelContainer.style.display = 'flex'
+        addFlag = true;
+    }else{
+        modelContainer.style.display = 'none'
+        addFlag = false;
+    }
 })
