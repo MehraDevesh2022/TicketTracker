@@ -4,7 +4,10 @@ let allPriorityColor = document.querySelectorAll('.priority-color');
 let allColors = ['lightgreen', 'lightblue', 'lightpink', 'black'];
 let modelPriorityColor = allColors[allColors.length - 1];
 let textAreaContVal = document.querySelector('.textarea-cont');
+let removeBtn = document.querySelector('.remove-btn');
+let removeBtnFlag = false;
 
+// add button functionality : 
 let addFlag = false;
 addBtn.addEventListener('click', (e) => {
   if (addFlag == false) {
@@ -17,19 +20,19 @@ addBtn.addEventListener('click', (e) => {
 })
 
 
-// generating a ticket
+// generating a ticket :
 let mainContainer = document.querySelector('.main-cont');
 modelContainer.addEventListener('keydown', function (e) {
   if (e.key === 'Shift') {
     createTicket(modelPriorityColor, textAreaContVal.value);
     modelContainer.style.display = 'none';
     addFlag = false;
-    textAreaContVal.value ='' // becuase of prv value still remain in container 
+    textAreaContVal.value = '' // becuase of prv value still remain in container 
   }
 })
 
-// ticket creater function =>
-function createTicket(modelPriorityColor , taskAreaVal) {
+// ticket creater function :
+function createTicket(modelPriorityColor, taskAreaVal) {
   let ticketCont = document.createElement('div');
   ticketCont.setAttribute('class', 'ticket-cont');
   ticketCont.innerHTML = `<div class="ticket-color ${modelPriorityColor}"></div>
@@ -38,10 +41,8 @@ function createTicket(modelPriorityColor , taskAreaVal) {
 
 
   mainContainer.appendChild(ticketCont);
-
+  handleRemove(ticketCont);
 }
-
-
 
 // now change the active color :
 
@@ -57,3 +58,19 @@ allPriorityColor.forEach((priorityColorElm) => { // in forEach loop no need to u
   })
 })
 
+removeBtn.addEventListener('click', function () {
+  removeBtnFlag = !removeBtnFlag
+  if (removeBtnFlag == true)
+    removeBtn.style.color = "red"
+  else
+    removeBtn.style.color = "black"
+})
+
+function handleRemove(ticket) {
+ticket.addEventListener('click' , function(){
+  if (removeBtnFlag == true) {
+    ticket.remove();
+
+  }
+})
+}
