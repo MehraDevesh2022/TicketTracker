@@ -3,7 +3,7 @@ let modelContainer = document.querySelector('.model-cont');
 let allPriorityColor = document.querySelectorAll('.priority-color');
 let allColors = ['lightgreen', 'lightblue', 'lightpink', 'black'];
 let modelPriorityColor = allColors[allColors.length - 1];
-let ticketColor = document.querySelector('.ticket-color');
+let textAreaContVal = document.querySelector('.textarea-cont');
 
 let addFlag = false;
 addBtn.addEventListener('click', (e) => {
@@ -21,23 +21,24 @@ addBtn.addEventListener('click', (e) => {
 let mainContainer = document.querySelector('.main-cont');
 modelContainer.addEventListener('keydown', function (e) {
   if (e.key === 'Shift') {
-    createTicket(modelPriorityColor);
+    createTicket(modelPriorityColor, textAreaContVal.value);
     modelContainer.style.display = 'none';
     addFlag = false;
+    textAreaContVal.value ='' // becuase of prv value still remain in container 
   }
 })
 
 // ticket creater function =>
-function createTicket(modelPriorityColor) {
+function createTicket(modelPriorityColor , taskAreaVal) {
   let ticketCont = document.createElement('div');
   ticketCont.setAttribute('class', 'ticket-cont');
   ticketCont.innerHTML = `<div class="ticket-color ${modelPriorityColor}"></div>
                           <div class="ticket-id">skxnsknx</div>
-                          <div class="task-area">go to bank</div>`
-                       
+                          <div class="task-area">${taskAreaVal}k</div>`
+
 
   mainContainer.appendChild(ticketCont);
- 
+
 }
 
 
@@ -51,7 +52,8 @@ allPriorityColor.forEach((priorityColorElm) => { // in forEach loop no need to u
     })
     priorityColorElm.classList.add('active-border');
     let currColorClass = priorityColorElm.classList[1];
-    modelPriorityColor=currColorClass
-    
+    modelPriorityColor = currColorClass
+
   })
 })
+
