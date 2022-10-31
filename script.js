@@ -1,4 +1,4 @@
-let addBtn = document.querySelector('.add-btn');
+
 let modelContainer = document.querySelector('.model-cont');
 let allPriorityColor = document.querySelectorAll('.priority-color');
 let allColors = ['lightgreen', 'lightblue', 'lightpink', 'black'];
@@ -6,9 +6,10 @@ let modelPriorityColor = allColors[allColors.length - 1];
 let textAreaContVal = document.querySelector('.textarea-cont');
 let removeBtn = document.querySelector('.remove-btn');
 let removeBtnFlag = false;
-
-// add button functionality : 
+let addBtn = document.querySelector('.add-btn');
 let addFlag = false;
+// add button functionality : 
+
 addBtn.addEventListener('click', (e) => {
   if (addFlag == false) {
     modelContainer.style.display = 'flex'
