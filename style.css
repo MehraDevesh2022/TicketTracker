@@ -66,6 +66,7 @@
   position: absolute;
   bottom: calc((100vh - 50vh) / 2);
   right: calc((100vw - 45vw) / 2);
+  /* display flex will ocures when + action btn will clicked  ; */
   display: none;
 
 }
@@ -84,7 +85,7 @@
   height: 100%;
   width: 25%;
   display: flex;
-  flex-direction: column;
+  flex-direction:column;
   justify-content: space-around;
   align-items: center;
 }
@@ -95,7 +96,8 @@
   border-radius: 1rem;
 }
 .active-border {
-  border: 2px solid red;
+  /* this will add dynamically */
+  border: 2px solid red; 
 }
 
 
@@ -112,6 +114,7 @@
   height: 12rem;
   width: 15rem;
   background-color:violet;
+  
 
 }
 .ticket-color{
@@ -123,7 +126,15 @@
   padding: 5px;
 }
 .task-area{
-  height: calc(100% - 1rem - 2rem);
+  height: calc(100% - 1rem - 2rem  - 2rem);
   font-size: 2rem;
    padding: 5px;
+   outline: none;
+}
+.ticket-lock{
+  display: flex;
+  height: 2rem;
+  justify-content: flex-end;
+   padding: 4px;
+  font-size: 1.5rem;  
 }

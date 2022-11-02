@@ -4,25 +4,31 @@ let allPriorityColor = document.querySelectorAll('.priority-color');
 let allColors = ['lightgreen', 'lightblue', 'lightpink', 'black'];
 let modelPriorityColor = allColors[allColors.length - 1];
 let textAreaContVal = document.querySelector('.textarea-cont');
+let mainContainer = document.querySelector('.main-cont');
 let removeBtn = document.querySelector('.remove-btn');
 let removeBtnFlag = false;
 let addBtn = document.querySelector('.add-btn');
 let addFlag = false;
+
+let ticketLockClass = 'fa-lock';
+let ticketUnlockClass = 'fa-lock-open';
+
+
 // add button functionality : 
 
 addBtn.addEventListener('click', (e) => {
   if (addFlag == false) {
-    modelContainer.style.display = 'flex'
+    modelContainer.style.display = 'flex';
     addFlag = true;
   } else {
-    modelContainer.style.display = 'none'
+    modelContainer.style.display = 'none';
     addFlag = false;
   }
 })
 
 
 // generating a ticket :
-let mainContainer = document.querySelector('.main-cont');
+
 modelContainer.addEventListener('keydown', function (e) {
   if (e.key === 'Shift') {
     createTicket(modelPriorityColor, textAreaContVal.value);
@@ -35,19 +41,22 @@ modelContainer.addEventListener('keydown', function (e) {
 // ticket creater function :
 function createTicket(modelPriorityColor, taskAreaVal) {
   let ticketCont = document.createElement('div');
+  
   ticketCont.setAttribute('class', 'ticket-cont');
   ticketCont.innerHTML = `<div class="ticket-color ${modelPriorityColor}"></div>
                           <div class="ticket-id">skxnsknx</div>
-                          <div class="task-area">${taskAreaVal}k</div>`
-
+                          <div class="task-area" contenteditable="true">${taskAreaVal}</div>
+                           <div class="ticket-lock">
+                        <i class="fa-sharp fa-solid fa-lock"></i>
+                         </div>`
 
   mainContainer.appendChild(ticketCont);
   handleRemove(ticketCont);
+  handlLock(ticketCont)
 }
 
-// now change the active color :
-
-allPriorityColor.forEach((priorityColorElm) => { // in forEach loop no need to used current target elm
+// now change the active border color :
+  allPriorityColor.forEach((priorityColorElm) => { // in forEach loop no need to used current target elm
   priorityColorElm.addEventListener('click', (e) => {
     allPriorityColor.forEach((priorityColor) => { // after click in color set active-border in that and remove from old one hence travel in allPriorityColor node list again
       priorityColor.classList.remove('active-border');
@@ -60,7 +69,7 @@ allPriorityColor.forEach((priorityColorElm) => { // in forEach loop no need to u
 })
 
 removeBtn.addEventListener('click', function () {
-  removeBtnFlag = !removeBtnFlag
+  removeBtnFlag = !removeBtnFlag;
   if (removeBtnFlag == true)
     removeBtn.style.color = "red"
   else
@@ -74,4 +83,24 @@ ticket.addEventListener('click' , function(){
 
   }
 })
+}
+
+// lock and unlock
+
+function handlLock(ticket){
+  let ticketLockElm = ticket.querySelector('.ticket-lock')
+  let taskArea = ticket.querySelector('.task-area');
+  let ticketLock = ticketLockElm.children[0];
+  ticketLockElm.addEventListener('click' ,function(){
+    if(ticketLock.classList.contains(ticketLockClass)){
+      ticketLock.classList.remove(ticketLockClass);
+      ticketLock.classList.add(ticketUnlockClass);
+      taskArea.setAttribute('contenteditable' , 'true');
+    }else{
+      ticketLock.classList.remove(ticketUnlockClass);
+      ticketLock.classList.add(ticketLockClass);
+      taskArea.setAttribute('contenteditable', 'false');
+    }
+  })
+
 }
