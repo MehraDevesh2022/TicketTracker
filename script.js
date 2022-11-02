@@ -158,7 +158,7 @@ for (let i = 0; i < toolBoxColor.length; i++) {
 
 for(let i=0; i<toolBoxColor.length ; i++){
   toolBoxColor[i].addEventListener('dblclick', function () {
-    // remove all filter value :
+    // remove all filter value : 
     let allTicket = document.querySelectorAll('.ticket-cont')
     for (let ticketObj of allTicket) {
       ticketObj.remove();
