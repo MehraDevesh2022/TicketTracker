@@ -30,7 +30,7 @@ addBtn.addEventListener('click', (e) => {
 // generating a ticket :
 modelContainer.addEventListener('keydown', function (e) {
   if (e.key === 'Shift') {
-    createTicket(modelPriorityColor, textAreaContVal.value);
+    createTicket(modelPriorityColor, textAreaContVal.value , shortid());
     modelContainer.style.display = 'none';
     addFlag = false;
     textAreaContVal.value = '' // becuase of prv value still remain in container 
@@ -38,12 +38,12 @@ modelContainer.addEventListener('keydown', function (e) {
 })
 
 // ticket creater function :
-function createTicket(modelPriorityColor, taskAreaVal) {
+function createTicket(modelPriorityColor, taskAreaVal , ticketId) {
   let ticketCont = document.createElement('div');
   
   ticketCont.setAttribute('class', 'ticket-cont');
   ticketCont.innerHTML = `<div class="ticket-color ${modelPriorityColor}"></div>
-                          <div class="ticket-id">skxnsknx</div>
+                          <div class="ticket-id">#${ticketId}</div>
                           <div class="task-area">${taskAreaVal}</div>
                            <div class="ticket-lock">
                         <i class="fa-sharp fa-solid fa-lock"></i>
