@@ -1,8 +1,8 @@
 
 let modelContainer = document.querySelector('.model-cont');
 let allPriorityColor = document.querySelectorAll('.priority-color');
-let allColors = ['lightgreen', 'lightblue', 'lightpink', 'black'];
-let modelPriorityColor = allColors[allColors.length - 1];
+let colorArr = ['lightpink', 'lightgreen', 'lightblue', 'black'];
+let modelPriorityColor = colorArr[colorArr.length - 1];
 let textAreaContVal = document.querySelector('.textarea-cont');
 let mainContainer = document.querySelector('.main-cont');
 let removeBtn = document.querySelector('.remove-btn');
@@ -28,7 +28,6 @@ addBtn.addEventListener('click', (e) => {
 
 
 // generating a ticket :
-
 modelContainer.addEventListener('keydown', function (e) {
   if (e.key === 'Shift') {
     createTicket(modelPriorityColor, textAreaContVal.value);
@@ -45,7 +44,7 @@ function createTicket(modelPriorityColor, taskAreaVal) {
   ticketCont.setAttribute('class', 'ticket-cont');
   ticketCont.innerHTML = `<div class="ticket-color ${modelPriorityColor}"></div>
                           <div class="ticket-id">skxnsknx</div>
-                          <div class="task-area" contenteditable="true">${taskAreaVal}</div>
+                          <div class="task-area">${taskAreaVal}</div>
                            <div class="ticket-lock">
                         <i class="fa-sharp fa-solid fa-lock"></i>
                          </div>`
@@ -53,6 +52,7 @@ function createTicket(modelPriorityColor, taskAreaVal) {
   mainContainer.appendChild(ticketCont);
   handleRemove(ticketCont);
   handlLock(ticketCont)
+  colorHandler(ticketCont);
 }
 
 // now change the active border color :
@@ -76,6 +76,7 @@ removeBtn.addEventListener('click', function () {
     removeBtn.style.color = "black"
 })
 
+
 function handleRemove(ticket) {
 ticket.addEventListener('click' , function(){
   if (removeBtnFlag == true) {
@@ -85,8 +86,8 @@ ticket.addEventListener('click' , function(){
 })
 }
 
-// lock and unlock
 
+// lock and unlock
 function handlLock(ticket){
   let ticketLockElm = ticket.querySelector('.ticket-lock')
   let taskArea = ticket.querySelector('.task-area');
@@ -103,4 +104,21 @@ function handlLock(ticket){
     }
   })
 
+}
+
+// color handler in ticket
+function colorHandler(ticket){
+  let ticketColorBand = ticket.querySelector('.ticket-color');
+
+  ticketColorBand.addEventListener('click' , function(e){
+    let currTicketColor = ticketColorBand.classList[1];
+    let ticketColorIdx = colorArr.findIndex(function(color){
+      return color === currTicketColor
+    })
+    ticketColorIdx++;
+    let newTicketColorIdx = ticketColorIdx % colorArr.length;
+    let newTicketColor = colorArr[newTicketColorIdx];
+    ticketColorBand.classList.remove(currTicketColor);
+    ticketColorBand.classList.add(newTicketColor);
+  })
 }

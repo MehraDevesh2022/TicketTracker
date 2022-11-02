@@ -114,7 +114,7 @@
   height: 12rem;
   width: 15rem;
   background-color:violet;
-  
+ word-wrap: break-word;  
 
 }
 .ticket-color{
