@@ -15,6 +15,15 @@ let ticketLockClass = 'fa-lock';
 let ticketUnlockClass = 'fa-lock-open';
 
 
+// get all ticket from local storage :
+
+if (localStorage.getItem('tickets')) {
+  allTicketContArr = JSON.parse(localStorage.getItem('tickets'))
+  allTicketContArr.forEach(function (ticket) {
+    createTicket(ticket.ticketColor, ticket.ticketTask, ticket.ticketID)
+  })
+}
+
 // add button functionality : 
 addBtn.addEventListener('click', function () {
   if (addFlag == false) {
@@ -56,6 +65,8 @@ function createTicket(ticketColor, ticketTask, ticketId) {
   console.log(ticketId);
   if (!ticketId) {
     allTicketContArr.push({ ticketColor: ticketColor, ticketTask: ticketTask, ticketId :  id })
+    
+    localStorage.setItem('tickets', JSON.stringify(allTicketContArr))
   }
 }
 
