@@ -39,10 +39,10 @@ addBtn.addEventListener('click', function () {
 // generating a ticket :
 modelContainer.addEventListener('keydown', function (e) {
   if (e.key === 'Shift') {
-    createTicket(modelPriorityColor, textAreaContVal.value , 0);
+    createTicket(modelPriorityColor, textAreaContVal.value, 0);
     modelContainer.style.display = 'none';
     addFlag = false;
-    textAreaContVal.value = '' // becuase of prv value still remain in container 
+    textAreaContVal.value = ''   // becuase of prv value still remain in container 
   }
 })
 
@@ -59,13 +59,13 @@ function createTicket(ticketColor, ticketTask, ticketId) {
                          </div>`
 
   mainContainer.appendChild(ticketCont);
-  handleRemove(ticketCont , id);
-  handlLock(ticketCont)
-  colorHandler(ticketCont);
-  console.log(ticketId);
+  handleRemove(ticketCont, id);
+  handleLock(ticketCont ,id)
+  colorHandler(ticketCont, id);
+  // console.log(ticketId);
   if (!ticketId) {
-    allTicketContArr.push({ ticketColor: ticketColor, ticketTask: ticketTask, ticketId :  id })
-    
+    allTicketContArr.push({ ticketColor: ticketColor, ticketTask: ticketTask, ticketId: id })
+
     localStorage.setItem('tickets', JSON.stringify(allTicketContArr))
   }
 }
@@ -83,6 +83,8 @@ allPriorityColor.forEach((priorityColorElm) => { // in forEach loop no need to u
   })
 })
 
+
+
 // remove ticket
 removeBtn.addEventListener('click', function () {
   removeBtnFlag = !removeBtnFlag;
@@ -93,14 +95,14 @@ removeBtn.addEventListener('click', function () {
 })
 
 // remove ticket handler
-function handleRemove(ticket ,id) {
+function handleRemove(ticket, id) {
   ticket.addEventListener('click', function () {
-    if (removeBtnFlag ==true) {
-       // get idx of ticket from allTicketContArr
+    if (removeBtnFlag == true) {
+      // get idx of ticket from allTicketContArr
       let ticketIdx = getTicketIdx(id);
       allTicketContArr.splice(ticketIdx, 1); // splice remove the elm from array include given idx to given total elm here only 1 elm will remove that is given ticketIdx
-       // now update allTicketContArr into local storage 
-      localStorage.setItem('tickets' , JSON.stringify(allTicketContArr));
+      // now update allTicketContArr into local storage 
+      localStorage.setItem('tickets', JSON.stringify(allTicketContArr));
       // remove from ui as well
       ticket.remove();
 
@@ -110,7 +112,7 @@ function handleRemove(ticket ,id) {
 
 
 // lock and unlock
-function handlLock(ticket) {
+function handleLock(ticket ,id) {
   let ticketLockElm = ticket.querySelector('.ticket-lock')
   let taskArea = ticket.querySelector('.task-area');
   let ticketLock = ticketLockElm.children[0];
@@ -124,12 +126,15 @@ function handlLock(ticket) {
       ticketLock.classList.add(ticketLockClass);
       taskArea.setAttribute('contenteditable', 'false');
     }
+    let ticketIdx = getTicketIdx(id);
+    allTicketContArr[ticketIdx].ticketTask = taskArea.innerText
+    localStorage.setItem('tickets', JSON.stringify(allTicketContArr)) 
   })
-
+    
 }
 
 // color handler in ticket
-function colorHandler(ticket) {
+function colorHandler(ticket, id) {
   let ticketColorBand = ticket.querySelector('.ticket-color');
 
   ticketColorBand.addEventListener('click', function (e) {
@@ -142,61 +147,67 @@ function colorHandler(ticket) {
     let newTicketColor = colorArr[newTicketColorIdx];
     ticketColorBand.classList.remove(currTicketColor);
     ticketColorBand.classList.add(newTicketColor);
+
+
+    // also update color at local storage :
+
+    let ticketIdx = getTicketIdx(id);
+    allTicketContArr[ticketIdx].ticketColor = newTicketColor;
+    localStorage.setItem('tickets', JSON.stringify(allTicketContArr));
   })
 }
 
 // ticket filter 
-for (let i = 0; i < toolBoxColor.length; i++) {
+  for (let i = 0; i < toolBoxColor.length; i++) {
   toolBoxColor[i].addEventListener('click', function () {
     let currToolBoxColor = toolBoxColor[i].classList[1];
-    // console.log(currToolBoxColor , allTicketContArr.length);
 
     // filter allTicketContArr based on toolbox selected color
     let filterTicketArr = allTicketContArr.filter(function (ticketObj) {
       return ticketObj.ticketColor === currToolBoxColor
-    
-    })
-   
 
+    })
     let allTicket = document.querySelectorAll('.ticket-cont')
     for (let ticketObj of allTicket) {
-      
-      ticketObj.remove();
-  
-    }
-
-    filterTicketArr.forEach(function (filterTicketObj) {
-      console.log(filterTicketObj.ticketTask);
-      createTicket(filterTicketObj.ticketColor, filterTicketObj.ticketTask, filterTicketObj.ticketId)
-    })
-  })
-
-  
+          ticketObj.remove();
 }
 
-for(let i=0; i<toolBoxColor.length ; i++){
-  toolBoxColor[i].addEventListener('dblclick', function () {
+    filterTicketArr.forEach(function (filterTicketObj) {
+      createTicket(filterTicketObj.ticketColor, filterTicketObj.ticketTask, filterTicketObj.ticketId)
+    })
+
+
+  })
+}
+
+   for (let i = 0; i < toolBoxColor.length; i++) {
+    toolBoxColor[i].addEventListener('dblclick', function () {
     // remove all filter value : 
     let allTicket = document.querySelectorAll('.ticket-cont')
     for (let ticketObj of allTicket) {
       ticketObj.remove();
 
     }
-    allTicketContArr.forEach(function (ticketObj) {
+     allTicketContArr.forEach(function (ticketObj) {
       createTicket(ticketObj.ticketColor, ticketObj.ticketTask, ticketObj.ticketId)
     })
+
+  })
+
+  toolBoxColor[i].addEventListener('click' , function(e){
 
   })
 }
 
 
+
+
 // getticket idx function used for remove Handler
 
-function getTicketIdx(id){
-  let idx = allTicketContArr.findIndex(function(arrObj){
-       return arrObj.ticketID == id
+function getTicketIdx(id) {
+  let idx = allTicketContArr.findIndex(function (arrObj) {
+    return arrObj.ticketId === id
   })
-  console.log('working');
-  return idx;
 
+  return idx;
 }
