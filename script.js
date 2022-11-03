@@ -20,7 +20,7 @@ let ticketUnlockClass = 'fa-lock-open';
 if (localStorage.getItem('tickets')) {
   allTicketContArr = JSON.parse(localStorage.getItem('tickets'))
   allTicketContArr.forEach(function (ticket) {
-    createTicket(ticket.ticketColor, ticket.ticketTask, ticket.ticketID)
+    createTicket(ticket.ticketColor, ticket.ticketTask, ticket.ticketId)
   })
 }
 
@@ -59,7 +59,7 @@ function createTicket(ticketColor, ticketTask, ticketId) {
                          </div>`
 
   mainContainer.appendChild(ticketCont);
-  handleRemove(ticketCont);
+  handleRemove(ticketCont , id);
   handlLock(ticketCont)
   colorHandler(ticketCont);
   console.log(ticketId);
@@ -83,6 +83,7 @@ allPriorityColor.forEach((priorityColorElm) => { // in forEach loop no need to u
   })
 })
 
+// remove ticket
 removeBtn.addEventListener('click', function () {
   removeBtnFlag = !removeBtnFlag;
   if (removeBtnFlag == true)
@@ -91,10 +92,16 @@ removeBtn.addEventListener('click', function () {
     removeBtn.style.color = "black"
 })
 
-
-function handleRemove(ticket) {
+// remove ticket handler
+function handleRemove(ticket ,id) {
   ticket.addEventListener('click', function () {
-    if (removeBtnFlag == true) {
+    if (removeBtnFlag ==true) {
+       // get idx of ticket from allTicketContArr
+      let ticketIdx = getTicketIdx(id);
+      allTicketContArr.splice(ticketIdx, 1); // splice remove the elm from array include given idx to given total elm here only 1 elm will remove that is given ticketIdx
+       // now update allTicketContArr into local storage 
+      localStorage.setItem('tickets' , JSON.stringify(allTicketContArr));
+      // remove from ui as well
       ticket.remove();
 
     }
@@ -180,4 +187,16 @@ for(let i=0; i<toolBoxColor.length ; i++){
     })
 
   })
+}
+
+
+// getticket idx function used for remove Handler
+
+function getTicketIdx(id){
+  let idx = allTicketContArr.findIndex(function(arrObj){
+       return arrObj.ticketID == id
+  })
+  console.log('working');
+  return idx;
+
 }
