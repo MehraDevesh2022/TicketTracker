@@ -7,7 +7,7 @@
 }
 .toolbox-cont {
   height: 5rem;
-  background: black;
+ background-color: #4b4b4b;;
   display: flex;
   align-items: center;
 }
@@ -17,7 +17,7 @@
 }
 .toolbox-priority-cont {
   height: 3rem;
-  background: magenta;
+  background-color: #4b4b4b;
   width: 18rem;
   display: flex;
   align-items: center;
@@ -26,7 +26,7 @@
 }
 .action-btn-cont {
   height: 3rem;
-  background: coral;
+   background-color: #3d3d3d;
   width: 7rem;
   display: flex;
 }
@@ -36,9 +36,10 @@
   align-items: center;
   width: 50%;
   font-size: 2rem;
+     color: #d1d8e0;
 }
 .action-btn-cont :hover{
- background: crimson;
+  background-color: #485460
 }
 .color {
   height: 2rem;
@@ -62,7 +63,7 @@
 .model-cont {
   height: 50vh;
   width: 45vw;
-  background-color: lightsalmon;
+  background-color: #485460;
   position: absolute;
   bottom: calc((100vh - 50vh) / 2);
   right: calc((100vw - 45vw) / 2);
@@ -76,11 +77,16 @@
   width: 75%;
   resize: none;
   border: none;
-  background-color: burlywood;
+  background-color: #dfe4ea;
   outline: none;
   font-size: 1.5rem;
   padding: 1rem;
 }
+
+  .textarea-cont::placeholder {
+    font-size: 18px;
+  }
+ 
 .priority-color-cont {
   height: 100%;
   width: 25%;
@@ -88,6 +94,7 @@
   flex-direction:column;
   justify-content: space-around;
   align-items: center;
+    background-color: #4b4b4b;
 }
 
 .priority-color {
@@ -113,7 +120,7 @@
 .ticket-cont{
   height: 12rem;
   width: 15rem;
-  background-color:violet;
+  background-color: #f1f2f6;
  word-wrap: break-word;  
 
 }
@@ -122,12 +129,13 @@
 }
 .ticket-id{
   height: 2rem;
-  background-color: blueviolet;
+  background-color: red;
   padding: 5px;
 }
 .task-area{
   height: calc(100% - 1rem - 2rem  - 2rem);
-  font-size: 2rem;
+  font-size: 1rem;
+  font-weight: bold;
    padding: 5px;
    outline: none;
 }
