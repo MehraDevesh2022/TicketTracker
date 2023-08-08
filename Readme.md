@@ -5,15 +5,13 @@ TicketTrackr is a task scheduling and ticket management application built using 
 ## Demo
 ---
  ### Home Page :
- <img src="./img/01.png" alt="Home Page" width="600" height="800" />
+ <img src="./img/01.png" alt="Home Page" width="800"  />
  
  ### Create Task :
-    
-    <img src="./img/02.png" alt="Create Task" width="600" height="800" />
+ <img src="./img/02.png" alt="Create Task" width="800" />
  
  ### Edit Task :
-   
-    <img src="./img/03.png" alt="Edit Task" width="600" height="800" />
+<img src="./img/03.png" alt="Edit Task" width="800"  />
 
 ## Features
 ---
